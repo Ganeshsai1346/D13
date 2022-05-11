@@ -1,10 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    
+    <!-- EXERCISE 1:
+    Specify the title, the charset (UTF-8) and the viewport of the page.
+    -->
+
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        /* EXERCISE 2:  
+         Create a CSS class for the task list with a different background color
+         Create a CSS class for the task list item with a border, a bold text and a bigger font size
+         Style every button of the page to be bigger
+      */
+    #myTaskList {
+        background-color: aqua;
+    }
+    #myTaskList li {
+        border: 1px solid firebrick;
+        border-radius: 5px;
+        font-weight: bolder;
+        font-size: large;
+    }
+    button {
+        font-size: 30px;
+        padding: 10px;
+        font-weight: larger;
+    }
+    input[type="button"] {
+        font-size: 30px;
+        padding: 10px;
+        font-weight: larger;
+    }
+    </style>
 </head>
 <body>
     <h1>Welcome to your personal Task List!</h1>
@@ -21,11 +52,11 @@
     <!-- EXERCISE 3
         Create a button "Remove Last Task" to trigger the method "removeLast"
         -->
-    <button onclick="removeLastTask()">Remove last</button>
+    <button onclick="removeLast()">Remove last Task</button>
     <!-- EXERCISE 4
         Create a button "Remove First Task" to trigger the method "removeFirst"
         -->
-    <button onclick="removeFirstTask()">Remove First</button>
+    <button onclick="removeFirst()">Remove First Task</button>
     <ul id="myTaskList"></ul>
 
     <hr />
@@ -49,36 +80,60 @@
                 - Use the document.createElement to create the new List Item
                 - Append the LI child to the UL
             */
-        function addNewTask() {
-            let taskToAdd = document.getElementById("newTask").value;
-
-            let newListItem = document.createElement("li");
-            newListItem.innerText = taskToAdd;
-            document.getElementById("myTaskList").appendChild(newListItem);
+        function addNewTask () {
+            let addList = document.getElementById("newTask").value
+            let ulItem = document.getElementById("myTaskList")
+            let newList = document.createElement("li")
+            newList.innerText = addList
+            ulItem.appendChild(newList)
         }
       /* EXERCISE 6: 
                 Create a method "removeLast" which removes the last item from the task list
             */
         
-        function removeLastTask() {
-            let taskList = document.getElementById("myTaskList");
-            let listItems = document.getElementsByTagName("li");
-            let removeLast = listItems[listItems.length - 1];
-            taskList.removeChild(removeLast);
+        function removeLast () {
+            let tasks = document.querySelectorAll("#myTaskList li")
+            tasks[tasks.length-1].remove()
         }
+            
 
       /* EXERCISE 7: 
                 Create a method "removeFirst" which removes the first item from the task list
             */
-
+        function removeFirst () {
+            let tasks = document.querySelectorAll("#myTaskList li")
+            tasks[0].remove()
+        }
+           
       /* EXERCISE 8: 
                Create a method "getTasksAsArray" which returns, and prints to the console an array containing the tasks as strings
             */
+           function getTasksAsArray () {
+               let list = document.getElementsByTagName("li")
+               let tasksAsArray = []
+               for (let i = 0; i < tasksAsArray.length; i++){
+                   tasksAsArray.push(list.innerText)
+               }
+
+           }
 
       /* EXERCISE 9:
                Create a method "changeTaskBackgroundColor" which takes the color from the color picker with an 
                onchange event listener ad applies it as background to every list item
             */
+            let picker = document.querySelector("#colorPicker").value
+           function changeTaskBackgroundColor() {
+               
+               let lists = document.querySelectorAll("#myTaskList li")
+
+            for (let i = 0; i < lists.length; i++ ) {
+                lists[i].style.backgroundColor = picker
+            }
+            }
+            let pickerEvent = document.querySelector("#colorPicker")
+            pickerEvent.addEventListener("change", changeTaskBackgroundColor)
+
+           
 
       /* EXTRA */
 
